@@ -1,9 +1,13 @@
-from flask_appbuilder import Model
+from app.extensions import db
+
+
 from sqlalchemy import Column, Integer, String, ForeignKey, Text, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
+Model = db.Model
 class Usuario(Model):
+    __tablename__ = "usuario"
     id = Column(Integer, primary_key=True)
     nombre = Column(String(100), nullable=False)
     correo = Column(String(120), unique=True, nullable=False)
@@ -17,6 +21,7 @@ class Usuario(Model):
 
 
 class Tecnico(Model):
+    __tablename__ = "tecnico"
     id = Column(Integer, primary_key=True)
     nombre = Column(String(100), nullable=False)
     correo = Column(String(120), unique=True, nullable=False)
@@ -28,6 +33,7 @@ class Tecnico(Model):
 
 
 class Categoria(Model):
+    __tablename__ = "categoria"
     id = Column(Integer, primary_key=True)
     nombre = Column(String(80), unique=True, nullable=False)
     descripcion = Column(Text)
@@ -38,6 +44,7 @@ class Categoria(Model):
 
 
 class Prioridad(Model):
+    __tablename__ = "prioridad"
     id = Column(Integer, primary_key=True)
     nombre = Column(String(50), unique=True, nullable=False)
     nivel = Column(Integer, nullable=False)
@@ -48,6 +55,7 @@ class Prioridad(Model):
 
 
 class Ticket(Model):
+    __tablename__ = "ticket"
     id = Column(Integer, primary_key=True)
     titulo = Column(String(150), nullable=False)
     descripcion = Column(Text, nullable=False)
@@ -75,6 +83,7 @@ class Ticket(Model):
 
 
 class Comentario(Model):
+    __tablename__ = "comentario"
     id = Column(Integer, primary_key=True)
     contenido = Column(Text, nullable=False)
     fecha_creacion = Column(DateTime, server_default=func.now())
