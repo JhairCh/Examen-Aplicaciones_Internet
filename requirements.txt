@@ -1,0 +1,4 @@
+Flask-AppBuilder==5.3.0
+PyMySQL==1.2.3
+python-dotenv==1.2.4
+groq==1.7.0
