@@ -1,12 +1,27 @@
 from flask_appbuilder import Model
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Text, DateTime
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 
-"""
+class Usuario(Model):
+    id = Column(Integer, primary_key=True)
+    nombre = Column(String(100), nullable=False)
+    correo = Column(String(120), unique=True, nullable=False)
+    telefono = Column(String(20))
+    tickets = relationship("Ticket", back_populates="usuario")
+    comentarios = relationship("Comentario", back_populates="usuario")
 
-You can use the extra Flask-AppBuilder fields and Mixin's
+    def __repr__(self):
+        return self.nombre
 
-AuditMixin will add automatic timestamp of created and modified by who
 
 
-"""
+class Tecnico(Model):
+    id = Column(Integer, primary_key=True)
+    nombre = Column(String(100), nullable=False)
+    correo = Column(String(120), unique=True, nullable=False)
+    especialidad = Column(String(100))
+    tickets = relationship("Ticket", back_populates="tecnico")
+
+    def __repr__(self):
+        return self.nombre
