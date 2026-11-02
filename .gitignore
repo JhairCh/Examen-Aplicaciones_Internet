@@ -1,0 +1,24 @@
+*.pyc
+app.db
+./tmp
+./build/*
+.idea
+env
+venv
+*.sublime*
+
+# Python
+__pycache__/
+*.py[cod]
+*.log
+
+# Entorno y variables privadas
+.venv/
+venv/
+.env
+
+# Archivos locales
+*.db
+instance/
+.idea/
+.vscode/
