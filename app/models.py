@@ -25,3 +25,28 @@ class Tecnico(Model):
 
     def __repr__(self):
         return self.nombre
+
+
+class Categoria(Model):
+    id = Column(Integer, primary_key=True)
+    nombre = Column(String(80), unique=True, nullable=False)
+    descripcion = Column(Text)
+    tickets = relationship("Ticket", back_populates="categoria")
+
+    def __repr__(self):
+        return self.nombre
+
+
+class Prioridad(Model):
+    id = Column(Integer, primary_key=True)
+    nombre = Column(String(50), unique=True, nullable=False)
+    nivel = Column(Integer, nullable=False)
+    tickets = relationship("Ticket", back_populates="prioridad")
+
+    def __repr__(self):
+        return self.nombre
+
+
+
+
+    
