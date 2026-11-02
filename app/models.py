@@ -19,7 +19,6 @@ class Usuario(Model):
         return self.nombre
 
 
-
 class Tecnico(Model):
     __tablename__ = "tecnico"
     id = Column(Integer, primary_key=True)
@@ -81,7 +80,6 @@ class Ticket(Model):
         return self.titulo
 
 
-
 class Comentario(Model):
     __tablename__ = "comentario"
     id = Column(Integer, primary_key=True)
@@ -96,5 +94,4 @@ class Comentario(Model):
 
     def __repr__(self):
         return f"Comentario {self.id}"
-
 
