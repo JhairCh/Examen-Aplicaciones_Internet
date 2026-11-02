@@ -10,6 +10,7 @@ from flask_appbuilder.security.manager import (
 )
 
 load_dotenv(Path(__file__).resolve().parent / ".env")
+basedir = str(Path(__file__).resolve().parent)
 
 # Your App secret key
 SECRET_KEY = os.environ["SECRET_KEY"]
