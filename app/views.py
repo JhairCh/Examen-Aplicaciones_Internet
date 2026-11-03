@@ -23,6 +23,7 @@ class PrioridadView(ModelView):
 
 class TicketView(ModelView):
     datamodel = SQLAInterface(models.Ticket)
+    add_template = "tickets/add.html"
 
 
 class ComentarioView(ModelView):

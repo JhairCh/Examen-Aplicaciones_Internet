@@ -1,0 +1,69 @@
+```html
+{% extends "appbuilder/general/model/add.html" %}
+
+{% block add_form %}
+    <div class="alert alert-info">
+        <strong>Asistente IA - TecnoGest</strong>
+        <p>Analiza el ticket y sugiere una categoría, prioridad y solución.</p>
+        <button type="button" id="btn-analizar-ia" class="btn btn-primary">
+            <i class="fa fa-magic"></i> Analizar con IA
+        </button>
+    </div>
+
+    <div id="resultado-ia" style="display: none;" class="alert alert-success"></div>
+
+    {{ super() }}
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const boton = document.getElementById("btn-analizar-ia");
+        const resultado = document.getElementById("resultado-ia");
+
+        boton.addEventListener("click", async function () {
+            const titulo = document.getElementById("titulo").value.trim();
+            const descripcion = document.getElementById("descripcion").value.trim();
+
+            if (!titulo || !descripcion) {
+                alert("Completa el título y la descripción antes de analizar.");
+                return;
+            }
+
+            boton.disabled = true;
+            boton.textContent = "Analizando...";
+            resultado.style.display = "block";
+            resultado.textContent = "La IA está analizando el ticket...";
+
+            try {
+                const respuesta = await fetch("/api/analizar-ticket", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ titulo, descripcion })
+                });
+
+                const datos = await respuesta.json();
+
+                if (!respuesta.ok) {
+                    throw new Error(datos.error || "No se pudo analizar el ticket.");
+                }
+
+                resultado.innerHTML = `
+                    <h4>Resultado del análisis</h4>
+                    <p><strong>Categoría:</strong> ${datos.categoria}</p>
+                    <p><strong>Prioridad:</strong> ${datos.prioridad}</p>
+                    <p><strong>Solución sugerida:</strong> ${datos.solucion}</p>
+                `;
+
+            } catch (error) {
+                resultado.className = "alert alert-danger";
+                resultado.textContent = error.message;
+            } finally {
+                boton.disabled = false;
+                boton.textContent = "Analizar con IA";
+            }
+        });
+    });
+    </script>
+{% endblock %}
+```
