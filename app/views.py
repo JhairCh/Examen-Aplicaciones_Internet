@@ -1,5 +1,8 @@
 from flask_appbuilder import ModelView
 from flask_appbuilder.models.sqla.interface import SQLAInterface
+from flask_appbuilder import BaseView, expose
+from sqlalchemy import func
+from .extensions import db
 
 from . import models
 
@@ -28,3 +31,50 @@ class TicketView(ModelView):
 
 class ComentarioView(ModelView):
     datamodel = SQLAInterface(models.Comentario)
+
+
+class ReportesView(BaseView):
+
+    route_base = "/reportes"
+
+    @expose("/list/")
+    def list(self):
+
+        # Reporte 1: Tickets por categoría
+        tickets_categoria = (
+            db.session.query(
+                models.Categoria.nombre,
+                func.count(models.Ticket.id)
+            )
+            .outerjoin(models.Ticket)
+            .group_by(models.Categoria.id, models.Categoria.nombre)
+            .all()
+        )
+
+        # Reporte 2: Tickets por prioridad
+        tickets_prioridad = (
+            db.session.query(
+                models.Prioridad.nombre,
+                func.count(models.Ticket.id)
+            )
+            .outerjoin(models.Ticket)
+            .group_by(models.Prioridad.id, models.Prioridad.nombre)
+            .all()
+        )
+
+        # Reporte 3: Tickets por estado
+        tickets_estado = (
+            db.session.query(
+                models.Ticket.estado,
+                func.count(models.Ticket.id)
+            )
+            .group_by(models.Ticket.estado)
+            .all()
+        )
+
+        return self.render_template(
+            "reportes/index.html",
+            tickets_categoria=tickets_categoria,
+            tickets_prioridad=tickets_prioridad,
+            tickets_estado=tickets_estado
+        )

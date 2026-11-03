@@ -14,7 +14,8 @@ def create_app() -> Flask:
 
         from .views import (
             UsuarioView, TecnicoView, CategoriaView,
-            PrioridadView, TicketView, ComentarioView
+            PrioridadView, TicketView, ComentarioView,
+            ReportesView
         )
 
         appbuilder.add_view(UsuarioView, "Usuarios", category="Gestión")
@@ -23,6 +24,13 @@ def create_app() -> Flask:
         appbuilder.add_view(PrioridadView, "Prioridades", category="Gestión")
         appbuilder.add_view(TicketView, "Tickets", category="Gestión")
         appbuilder.add_view(ComentarioView, "Comentarios", category="Gestión")
+
+        appbuilder.add_view(
+            ReportesView,
+            "Ver reportes",
+            icon="fa-bar-chart",
+            category="Reportes"
+        )
 
         @app.route("/api/analizar-ticket", methods=["POST"])
         def api_analizar_ticket():
