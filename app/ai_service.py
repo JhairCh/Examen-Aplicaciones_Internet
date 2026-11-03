@@ -1,12 +1,14 @@
+
 import os
+import json
 from groq import Groq
 
 
-def analizar_ticket(titulo, descripcion):
+def analizar_ticket(titulo, descripcion, categorias, prioridades):
     api_key = os.getenv("GROQ_API_KEY")
 
     if not api_key:
-        return "Error: no se encontró la API Key de Groq."
+        return {"error": "No se encontró la API Key de Groq."}
 
     try:
         client = Groq(api_key=api_key)
@@ -16,13 +18,21 @@ def analizar_ticket(titulo, descripcion):
             messages=[
                 {
                     "role": "system",
-                    "content": """
+                    "content": f"""
                     Eres un asistente experto en soporte técnico.
-                    Analiza los tickets y proporciona:
-                    1. Categoría sugerida.
-                    2. Prioridad: Baja, Media, Alta o Crítica.
-                    3. Posible solución.
-                    Responde en español de forma clara y breve.
+
+                    Analiza el ticket y responde exclusivamente en JSON
+                    con estas tres propiedades:
+                    - categoria
+                    - prioridad
+                    - solucion
+
+                    Categorías disponibles: {categorias}
+                    Prioridades disponibles: {prioridades}
+
+                    Selecciona exactamente una categoría y una prioridad
+                    de las listas proporcionadas.
+                    La solución debe ser breve y estar en español.
                     """
                 },
                 {
@@ -30,10 +40,18 @@ def analizar_ticket(titulo, descripcion):
                     "content": f"Título: {titulo}\nDescripción: {descripcion}"
                 }
             ],
-            temperature=0.3
+            temperature=0.3,
+            response_format={"type": "json_object"}
         )
 
-        return respuesta.choices[0].message.content
+        contenido = respuesta.choices[0].message.content
+        resultado = json.loads(contenido)
+
+        return {
+            "categoria": resultado["categoria"],
+            "prioridad": resultado["prioridad"],
+            "solucion": resultado["solucion"]
+        }
 
     except Exception as e:
-        return f"Error al analizar el ticket: {str(e)}"
+        return {"error": f"Error al analizar el ticket: {str(e)}"}
