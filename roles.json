@@ -1,0 +1,885 @@
+[
+  {
+    "name": "Admin",
+    "permissions": [
+      {
+        "permission": {
+          "name": "can_this_form_get"
+        },
+        "view_menu": {
+          "name": "UserInfoEditView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_this_form_get"
+        },
+        "view_menu": {
+          "name": "ResetPasswordView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_this_form_get"
+        },
+        "view_menu": {
+          "name": "ResetMyPasswordView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_this_form_post"
+        },
+        "view_menu": {
+          "name": "UserInfoEditView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_this_form_post"
+        },
+        "view_menu": {
+          "name": "ResetPasswordView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_this_form_post"
+        },
+        "view_menu": {
+          "name": "ResetMyPasswordView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_download"
+        },
+        "view_menu": {
+          "name": "UserDBModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_download"
+        },
+        "view_menu": {
+          "name": "RoleModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_download"
+        },
+        "view_menu": {
+          "name": "UserGroupModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_download"
+        },
+        "view_menu": {
+          "name": "UsuarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_download"
+        },
+        "view_menu": {
+          "name": "TecnicoView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_download"
+        },
+        "view_menu": {
+          "name": "CategoriaView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_download"
+        },
+        "view_menu": {
+          "name": "PrioridadView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_download"
+        },
+        "view_menu": {
+          "name": "TicketView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_download"
+        },
+        "view_menu": {
+          "name": "ComentarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_userinfo"
+        },
+        "view_menu": {
+          "name": "UserDBModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "UserDBModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "RoleModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "UserGroupModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "PermissionModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "ViewMenuModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "PermissionViewModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "UsuarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "TecnicoView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "CategoriaView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "PrioridadView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "TicketView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "ComentarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_edit"
+        },
+        "view_menu": {
+          "name": "UserDBModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_edit"
+        },
+        "view_menu": {
+          "name": "RoleModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_edit"
+        },
+        "view_menu": {
+          "name": "UserGroupModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_edit"
+        },
+        "view_menu": {
+          "name": "UsuarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_edit"
+        },
+        "view_menu": {
+          "name": "TecnicoView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_edit"
+        },
+        "view_menu": {
+          "name": "CategoriaView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_edit"
+        },
+        "view_menu": {
+          "name": "PrioridadView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_edit"
+        },
+        "view_menu": {
+          "name": "TicketView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_edit"
+        },
+        "view_menu": {
+          "name": "ComentarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_add"
+        },
+        "view_menu": {
+          "name": "UserDBModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_add"
+        },
+        "view_menu": {
+          "name": "RoleModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_add"
+        },
+        "view_menu": {
+          "name": "UserGroupModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_add"
+        },
+        "view_menu": {
+          "name": "UsuarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_add"
+        },
+        "view_menu": {
+          "name": "TecnicoView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_add"
+        },
+        "view_menu": {
+          "name": "CategoriaView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_add"
+        },
+        "view_menu": {
+          "name": "PrioridadView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_add"
+        },
+        "view_menu": {
+          "name": "TicketView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_add"
+        },
+        "view_menu": {
+          "name": "ComentarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_delete"
+        },
+        "view_menu": {
+          "name": "UserDBModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_delete"
+        },
+        "view_menu": {
+          "name": "RoleModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_delete"
+        },
+        "view_menu": {
+          "name": "UserGroupModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_delete"
+        },
+        "view_menu": {
+          "name": "UsuarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_delete"
+        },
+        "view_menu": {
+          "name": "TecnicoView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_delete"
+        },
+        "view_menu": {
+          "name": "CategoriaView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_delete"
+        },
+        "view_menu": {
+          "name": "PrioridadView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_delete"
+        },
+        "view_menu": {
+          "name": "TicketView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_delete"
+        },
+        "view_menu": {
+          "name": "ComentarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_show"
+        },
+        "view_menu": {
+          "name": "UserDBModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_show"
+        },
+        "view_menu": {
+          "name": "RoleModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_show"
+        },
+        "view_menu": {
+          "name": "UserGroupModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_show"
+        },
+        "view_menu": {
+          "name": "UsuarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_show"
+        },
+        "view_menu": {
+          "name": "TecnicoView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_show"
+        },
+        "view_menu": {
+          "name": "CategoriaView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_show"
+        },
+        "view_menu": {
+          "name": "PrioridadView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_show"
+        },
+        "view_menu": {
+          "name": "TicketView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_show"
+        },
+        "view_menu": {
+          "name": "ComentarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "resetmypassword"
+        },
+        "view_menu": {
+          "name": "UserDBModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "resetpasswords"
+        },
+        "view_menu": {
+          "name": "UserDBModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "userinfoedit"
+        },
+        "view_menu": {
+          "name": "UserDBModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "List Users"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Security"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "List Roles"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "List Groups"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "User's Statistics"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Base Permissions"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Views/Menus"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Permission on Views/Menus"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Usuarios"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Gesti\u00f3n"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "T\u00e9cnicos"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Categor\u00edas"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Prioridades"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Tickets"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Comentarios"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Ver reportes"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Reportes"
+        }
+      },
+      {
+        "permission": {
+          "name": "copyrole"
+        },
+        "view_menu": {
+          "name": "RoleModelView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_chart"
+        },
+        "view_menu": {
+          "name": "UserStatsChartView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_get"
+        },
+        "view_menu": {
+          "name": "MenuApi"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Public",
+    "permissions": []
+  },
+  {
+    "name": "Tecnico",
+    "permissions": [
+      {
+        "permission": {
+          "name": "can_edit"
+        },
+        "view_menu": {
+          "name": "ComentarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "ComentarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_show"
+        },
+        "view_menu": {
+          "name": "TicketView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_show"
+        },
+        "view_menu": {
+          "name": "ComentarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_edit"
+        },
+        "view_menu": {
+          "name": "TicketView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_add"
+        },
+        "view_menu": {
+          "name": "ComentarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "TicketView"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Gesti\u00f3n"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Comentarios"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Tickets"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Usuario",
+    "permissions": [
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "ComentarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_add"
+        },
+        "view_menu": {
+          "name": "TicketView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_list"
+        },
+        "view_menu": {
+          "name": "TicketView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_add"
+        },
+        "view_menu": {
+          "name": "ComentarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_show"
+        },
+        "view_menu": {
+          "name": "ComentarioView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_show"
+        },
+        "view_menu": {
+          "name": "TicketView"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Tickets"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Comentarios"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_this_form_post"
+        },
+        "view_menu": {
+          "name": "UserInfoEditView"
+        }
+      },
+      {
+        "permission": {
+          "name": "can_this_form_get"
+        },
+        "view_menu": {
+          "name": "UserInfoEditView"
+        }
+      },
+      {
+        "permission": {
+          "name": "menu_access"
+        },
+        "view_menu": {
+          "name": "Gesti\u00f3n"
+        }
+      }
+    ]
+  }
+]
