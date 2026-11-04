@@ -7,6 +7,7 @@
     <h2>Panel de Reportes - TecnoGest</h2>
     <p class="text-muted">Resumen de las solicitudes de soporte técnico.</p>
 
+    <!-- GRAFICOS -->
     <div class="row">
 
         <div class="col-md-4">
@@ -15,12 +16,45 @@
                     <h3 class="panel-title">Tickets por categoría</h3>
                 </div>
                 <div class="panel-body">
+                    <canvas id="graficoCategoria"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Tickets por prioridad</h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="graficoPrioridad"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Tickets por estado</h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="graficoEstado"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TABLAS -->
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Detalle por categoría</div>
+                <div class="panel-body">
                     <table class="table table-striped">
                         <thead>
-                            <tr>
-                                <th>Categoría</th>
-                                <th>Cantidad</th>
-                            </tr>
+                            <tr><th>Categoría</th><th>Cantidad</th></tr>
                         </thead>
                         <tbody>
                             {% for nombre, cantidad in tickets_categoria %}
@@ -37,16 +71,11 @@
 
         <div class="col-md-4">
             <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Tickets por prioridad</h3>
-                </div>
+                <div class="panel-heading">Detalle por prioridad</div>
                 <div class="panel-body">
                     <table class="table table-striped">
                         <thead>
-                            <tr>
-                                <th>Prioridad</th>
-                                <th>Cantidad</th>
-                            </tr>
+                            <tr><th>Prioridad</th><th>Cantidad</th></tr>
                         </thead>
                         <tbody>
                             {% for nombre, cantidad in tickets_prioridad %}
@@ -63,16 +92,11 @@
 
         <div class="col-md-4">
             <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Tickets por estado</h3>
-                </div>
+                <div class="panel-heading">Detalle por estado</div>
                 <div class="panel-body">
                     <table class="table table-striped">
                         <thead>
-                            <tr>
-                                <th>Estado</th>
-                                <th>Cantidad</th>
-                            </tr>
+                            <tr><th>Estado</th><th>Cantidad</th></tr>
                         </thead>
                         <tbody>
                             {% for nombre, cantidad in tickets_estado %}
@@ -81,9 +105,7 @@
                                 <td><strong>{{ cantidad }}</strong></td>
                             </tr>
                             {% else %}
-                            <tr>
-                                <td colspan="2">No hay tickets registrados.</td>
-                            </tr>
+                            <tr><td colspan="2">No hay tickets registrados.</td></tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -93,4 +115,113 @@
 
     </div>
 </div>
+
+<!-- LIBRERIA CHART.JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const categorias = {
+        labels: [
+            {% for nombre, cantidad in tickets_categoria %}
+                {{ nombre|tojson }}{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ],
+        datos: [
+            {% for nombre, cantidad in tickets_categoria %}
+                {{ cantidad }}{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ]
+    };
+
+    const prioridades = {
+        labels: [
+            {% for nombre, cantidad in tickets_prioridad %}
+                {{ nombre|tojson }}{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ],
+        datos: [
+            {% for nombre, cantidad in tickets_prioridad %}
+                {{ cantidad }}{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ]
+    };
+
+    const estados = {
+        labels: [
+            {% for nombre, cantidad in tickets_estado %}
+                {{ nombre|tojson }}{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ],
+        datos: [
+            {% for nombre, cantidad in tickets_estado %}
+                {{ cantidad }}{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ]
+    };
+
+    // Grafico de categorias
+    new Chart(document.getElementById("graficoCategoria"), {
+        type: "bar",
+        data: {
+            labels: categorias.labels,
+            datasets: [{
+                label: "Cantidad de tickets",
+                data: categorias.datos,
+                backgroundColor: "#337ab7"
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: { beginAtZero: true, ticks: { precision: 0 } }
+            }
+        }
+    });
+
+    // Grafico de prioridades
+    new Chart(document.getElementById("graficoPrioridad"), {
+        type: "pie",
+        data: {
+            labels: prioridades.labels,
+            datasets: [{
+                data: prioridades.datos,
+                backgroundColor: [
+                    "#5cb85c", "#f0ad4e", "#d9534f", "#8e44ad"
+                ]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+    // Grafico de estados
+    new Chart(document.getElementById("graficoEstado"), {
+        type: "bar",
+        data: {
+            labels: estados.labels,
+            datasets: [{
+                label: "Cantidad de tickets",
+                data: estados.datos,
+                backgroundColor: "#5bc0de"
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: { beginAtZero: true, ticks: { precision: 0 } }
+            }
+        }
+    });
+
+});
+</script>
 {% endblock %}
