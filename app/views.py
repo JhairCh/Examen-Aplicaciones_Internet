@@ -63,13 +63,24 @@ class ReportesView(BaseView):
         )
 
         # Reporte 3: Tickets por estado
-        tickets_estado = (
+        conteo_estados = dict(
             db.session.query(
                 models.Ticket.estado,
                 func.count(models.Ticket.id)
             )
             .group_by(models.Ticket.estado)
             .all()
+        )
+
+        estados = ["Pendiente", "En proceso", "Resuelto"]
+
+        tickets_estado = sorted(
+            [
+                (estado, conteo_estados.get(estado, 0))
+                for estado in estados
+            ],
+            key=lambda x: x[1],
+            reverse=True
         )
 
         return self.render_template(
