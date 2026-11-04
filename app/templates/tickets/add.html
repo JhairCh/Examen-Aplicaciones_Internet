@@ -1,4 +1,3 @@
-```html
 {% extends "appbuilder/general/model/add.html" %}
 
 {% block add_form %}
@@ -12,12 +11,20 @@
 
     <div id="resultado-ia" style="display: none;" class="alert alert-success"></div>
 
+    <button type="button" id="btn-aplicar-ia" class="btn btn-success"
+            style="display: none; margin-bottom: 15px;">
+        <i class="fa fa-check"></i> Aplicar sugerencias
+    </button>
+
     {{ super() }}
 
     <script>
     document.addEventListener("DOMContentLoaded", function () {
         const boton = document.getElementById("btn-analizar-ia");
+        const aplicar = document.getElementById("btn-aplicar-ia");
         const resultado = document.getElementById("resultado-ia");
+
+        let sugerencias = null;
 
         boton.addEventListener("click", async function () {
             const titulo = document.getElementById("titulo").value.trim();
@@ -30,16 +37,15 @@
 
             boton.disabled = true;
             boton.textContent = "Analizando...";
+            aplicar.style.display = "none";
             resultado.style.display = "block";
             resultado.textContent = "La IA está analizando el ticket...";
 
             try {
                 const respuesta = await fetch("/api/analizar-ticket", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ titulo, descripcion })
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({titulo, descripcion})
                 });
 
                 const datos = await respuesta.json();
@@ -48,14 +54,31 @@
                     throw new Error(datos.error || "No se pudo analizar el ticket.");
                 }
 
-                resultado.innerHTML = `
-                    <h4>Resultado del análisis</h4>
-                    <p><strong>Categoría:</strong> ${datos.categoria}</p>
-                    <p><strong>Prioridad:</strong> ${datos.prioridad}</p>
-                    <p><strong>Solución sugerida:</strong> ${datos.solucion}</p>
-                `;
+                sugerencias = datos;
+                resultado.className = "alert alert-success";
+                resultado.replaceChildren();
+
+                const encabezado = document.createElement("h4");
+                encabezado.textContent = "Resultado del análisis";
+                resultado.appendChild(encabezado);
+
+                [
+                    ["Categoría", datos.categoria],
+                    ["Prioridad", datos.prioridad],
+                    ["Solución sugerida", datos.solucion]
+                ].forEach(([etiqueta, valor]) => {
+                    const parrafo = document.createElement("p");
+                    const fuerte = document.createElement("strong");
+                    fuerte.textContent = etiqueta + ": ";
+                    parrafo.appendChild(fuerte);
+                    parrafo.appendChild(document.createTextNode(valor));
+                    resultado.appendChild(parrafo);
+                });
+
+                aplicar.style.display = "inline-block";
 
             } catch (error) {
+                sugerencias = null;
                 resultado.className = "alert alert-danger";
                 resultado.textContent = error.message;
             } finally {
@@ -63,7 +86,40 @@
                 boton.textContent = "Analizar con IA";
             }
         });
+
+        aplicar.addEventListener("click", function () {
+            if (!sugerencias) return;
+
+            const campos = [
+                ["categoria", sugerencias.categoria],
+                ["prioridad", sugerencias.prioridad]
+            ];
+
+            for (const [id, nombre] of campos) {
+                const select = document.getElementById(id);
+
+                const opcion = Array.from(select.options).find(
+                    option => option.text.trim().toLowerCase() ===
+                              nombre.trim().toLowerCase()
+                );
+
+                if (!opcion) {
+                    alert("No se encontró la opción: " + nombre);
+                    return;
+                }
+
+                select.value = opcion.value;
+
+                if (window.jQuery) {
+                    window.jQuery(select).trigger("change");
+                } else {
+                    select.dispatchEvent(new Event("change", {bubbles: true}));
+                }
+            }
+
+            aplicar.textContent = "✓ Sugerencias aplicadas";
+            aplicar.disabled = true;
+        });
     });
     </script>
 {% endblock %}
-```
