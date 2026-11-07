@@ -3,6 +3,7 @@ from flask_appbuilder.models.sqla.interface import SQLAInterface
 from flask_appbuilder import BaseView, expose
 from sqlalchemy import func
 from .extensions import db
+from flask import g
 from .filters import FiltroTicketsPorUsuario, FiltroComentariosPorUsuario
 
 from . import models
@@ -30,10 +31,36 @@ class TicketView(ModelView):
     add_template = "tickets/add.html"
     base_filters = [("id", FiltroTicketsPorUsuario, None)]
 
+    def pre_add(self, item):
+        usuario_fab = getattr(g, "user", None)
+
+        if not usuario_fab:
+            return
+
+        roles = {rol.name for rol in usuario_fab.roles}
+
+        if "Usuario" in roles and "Admin" not in roles:
+            usuario = models.Usuario.query.filter_by(
+                correo=usuario_fab.email
+            ).first()
+
+            if usuario:
+                item.usuario = usuario
 
 class ComentarioView(ModelView):
     datamodel = SQLAInterface(models.Comentario)
-    base_filters = [("id", FiltroComentariosPorUsuario, None)]
+
+    base_filters = [
+        ("id", FiltroComentariosPorUsuario, None)
+    ]
+
+    add_form_query_rel_fields = {
+        "ticket": [["id", FiltroTicketsPorUsuario, None]]
+    }
+
+    edit_form_query_rel_fields = {
+        "ticket": [["id", FiltroTicketsPorUsuario, None]]
+    }
 
 
 class ReportesView(BaseView):
