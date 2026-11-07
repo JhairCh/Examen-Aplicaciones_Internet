@@ -3,6 +3,7 @@ from flask_appbuilder.models.sqla.interface import SQLAInterface
 from flask_appbuilder import BaseView, expose
 from sqlalchemy import func
 from .extensions import db
+from .filters import FiltroTicketsPorUsuario, FiltroComentariosPorUsuario
 
 from . import models
 
@@ -27,10 +28,12 @@ class PrioridadView(ModelView):
 class TicketView(ModelView):
     datamodel = SQLAInterface(models.Ticket)
     add_template = "tickets/add.html"
+    base_filters = [("id", FiltroTicketsPorUsuario, None)]
 
 
 class ComentarioView(ModelView):
     datamodel = SQLAInterface(models.Comentario)
+    base_filters = [("id", FiltroComentariosPorUsuario, None)]
 
 
 class ReportesView(BaseView):
