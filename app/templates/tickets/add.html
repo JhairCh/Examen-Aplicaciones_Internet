@@ -17,6 +17,7 @@
     </button>
 
     {{ super() }}
+    <input type="hidden" id="solucion_ia" name="solucion_ia">
 
     <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -87,39 +88,42 @@
             }
         });
 
-        aplicar.addEventListener("click", function () {
-            if (!sugerencias) return;
+    aplicar.addEventListener("click", function () {
+        if (!sugerencias) return;
 
-            const campos = [
-                ["categoria", sugerencias.categoria],
-                ["prioridad", sugerencias.prioridad]
-            ];
+        const campos = [
+            ["categoria", sugerencias.categoria],
+            ["prioridad", sugerencias.prioridad]
+        ];
 
-            for (const [id, nombre] of campos) {
-                const select = document.getElementById(id);
+        // Guardar la solución sugerida por la IA
+        document.getElementById("solucion_ia").value = sugerencias.solucion;
 
-                const opcion = Array.from(select.options).find(
-                    option => option.text.trim().toLowerCase() ===
-                              nombre.trim().toLowerCase()
-                );
+        for (const [id, nombre] of campos) {
+            const select = document.getElementById(id);
 
-                if (!opcion) {
-                    alert("No se encontró la opción: " + nombre);
-                    return;
-                }
+            const opcion = Array.from(select.options).find(
+                option => option.text.trim().toLowerCase() ===
+                        nombre.trim().toLowerCase()
+            );
 
-                select.value = opcion.value;
-
-                if (window.jQuery) {
-                    window.jQuery(select).trigger("change");
-                } else {
-                    select.dispatchEvent(new Event("change", {bubbles: true}));
-                }
+            if (!opcion) {
+                alert("No se encontró la opción: " + nombre);
+                return;
             }
 
-            aplicar.textContent = "✓ Sugerencias aplicadas";
-            aplicar.disabled = true;
-        });
+            select.value = opcion.value;
+
+            if (window.jQuery) {
+                window.jQuery(select).trigger("change");
+            } else {
+                select.dispatchEvent(new Event("change", {bubbles: true}));
+            }
+        }
+
+        aplicar.textContent = "✓ Sugerencias aplicadas";
+        aplicar.disabled = true;
+    });
     });
     </script>
 {% endblock %}

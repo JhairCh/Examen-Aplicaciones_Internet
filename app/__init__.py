@@ -1,11 +1,13 @@
 from flask import Flask, request, jsonify
 from .extensions import appbuilder, db
 from . import models
+from .views import TecnoGestIndexView
 
 
 def create_app() -> Flask:
     app = Flask(__name__)
     app.config.from_object("config")
+    app.config["FAB_INDEX_VIEW"] = "app.views.TecnoGestIndexView"
 
     with app.app_context():
         db.init_app(app)
