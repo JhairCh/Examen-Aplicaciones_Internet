@@ -32,16 +32,29 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Tickets por estado</h3>
+        
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Resumen por estado</h3>
+            </div>
+
+            <div class="panel-body">
+                {% for nombre, cantidad in tickets_estado %}
+                <div class="well text-center">
+                    <h4>{{ nombre }}</h4>
+                    <h2><strong>{{ cantidad }}</strong></h2>
+                    <span class="text-muted">Tickets registrados</span>
                 </div>
-                <div class="panel-body">
-                    <canvas id="graficoEstado"></canvas>
-                </div>
+                {% else %}
+                <p class="text-muted text-center">
+                    No hay tickets registrados.
+                </p>
+                {% endfor %}
             </div>
         </div>
+    </div>
+
 
     </div>
 
@@ -148,18 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ]
     };
 
-    const estados = {
-        labels: [
-            {% for nombre, cantidad in tickets_estado %}
-                {{ nombre|tojson }}{% if not loop.last %},{% endif %}
-            {% endfor %}
-        ],
-        datos: [
-            {% for nombre, cantidad in tickets_estado %}
-                {{ cantidad }}{% if not loop.last %},{% endif %}
-            {% endfor %}
-        ]
-    };
+
 
     // Grafico de categorias
     new Chart(document.getElementById("graficoCategoria"), {
@@ -200,27 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Grafico de estados
-    new Chart(document.getElementById("graficoEstado"), {
-        type: "bar",
-        data: {
-            labels: estados.labels,
-            datasets: [{
-                label: "Cantidad de tickets",
-                data: estados.datos,
-                backgroundColor: "#5bc0de"
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { display: false }
-            },
-            scales: {
-                y: { beginAtZero: true, ticks: { precision: 0 } }
-            }
-        }
-    });
+
 
 });
 </script>
